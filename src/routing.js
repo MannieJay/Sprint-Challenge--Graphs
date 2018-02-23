@@ -4,7 +4,7 @@
  * Edge class
  */
 class Edge {
-  constructor(destination, weight=1) {
+  constructor(destination, weight = 1) {
     this.destination = destination;
     this.weight = weight;
   }
@@ -14,7 +14,7 @@ class Edge {
  * Vertex class
  */
 class Vertex {
-  constructor(value='vertex') {
+  constructor(value = 'vertex') {
     this.value = value;
     this.edges = [];
   }
@@ -44,7 +44,12 @@ class Graph {
    * @return null if not found.
    */
   findVertex(value) {
-    // !!! IMPLEMENT ME
+    for (let i = 0; i < this.vertexes.length; i++) {
+      if (this.vertexes[i].value === value) {
+        return this.vertexes[i];
+        break;
+      }
+    }
   }
 
   /**
@@ -54,31 +59,51 @@ class Graph {
    * @param {Vertex} start The starting vertex for the BFS
    */
   bfs(start) {
-    // !!! IMPLEMENT ME
-  }
+    let v = this.vertex[i];
+    for (let i = 0; i < this.vertexes.length; i++) {
+      let v.color = white;
+      let v.parent = null;
+    }
+    start.color = gray;
+    let queue = [];
+    queue.enqueue(start);
 
-  /**
-   * Print out the route from the start vert back along the parent
-   * pointers (set in the previous BFS)
-   *
-   * @param {Vertex} start The starting vertex to follow parent
-   *                       pointers from
-   */
-  outputRoute(start) {
-    // !!! IMPLEMENT ME
-  }
+    while (!queue.isEmpty()) {
+      let u = queue[0];
 
-  /**
-   * Show the route from a starting vert to an ending vert.
-   */
-  route(start, end) {
-    // Do BFS and build parent pointer tree
-    this.bfs(end);
+      for (let i = 0; i < this.vertexes.length; i++) {
+        if (v.color === white) {
+          v.color = gray;
+          v.parent = u;
+          queue.enqueue(v);
+        }
+        queue.dequeue()
+        u.color = black;
+      }
+    }
 
-    // Show the route from the start
-    this.outputRoute(start);
+    /**
+     * Print out the route from the start vert back along the parent
+     * pointers (set in the previous BFS)
+     *
+     * @param {Vertex} start The starting vertex to follow parent
+     *                       pointers from
+     */
+    outputRoute(start) {
+      // !!! IMPLEMENT ME
+    }
+
+    /**
+     * Show the route from a starting vert to an ending vert.
+     */
+    route(start, end) {
+      // Do BFS and build parent pointer tree
+      this.bfs(end);
+
+      // Show the route from the start
+      this.outputRoute(start);
+    }
   }
-}
 
 /**
  * Helper function to add bidirectional edges
