@@ -89,8 +89,23 @@ class Graph {
      * @param {Vertex} start The starting vertex to follow parent
      *                       pointers from
      */
+    getParent(v) {
+      if (v.parent) {
+        this.count = this.count + 1;
+        return v.parent;
+      } else {
+        this.none = true;
+      }
+    }
+
     outputRoute(start) {
-      // !!! IMPLEMENT ME
+      this.none = false;
+      this.count = 0;
+      let queue = [start];
+      while (this.none === false) {
+        queue.push(getParent(queue[count]));
+      }
+      return queue;
     }
 
     /**
